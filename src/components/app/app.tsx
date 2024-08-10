@@ -4,13 +4,14 @@ import styles from './app.module.css';
 import { AppHeader } from '@components';
 import { AppRoute } from '../routes/routes';
 import { useEffect } from 'react';
-import { useDispatch } from '../../services/store';
+import { createAppAsyncThunk, useDispatch } from '../../services/store';
 import { getIngredients } from '../../services/thunk/ingredients';
 import { userAutoLogin } from '../../services/thunk/user';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(createAppAsyncThunk);
     dispatch(getIngredients());
     dispatch(userAutoLogin());
   }, []);

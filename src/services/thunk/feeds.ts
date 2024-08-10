@@ -1,8 +1,9 @@
-import { getFeedsApi } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { burgerApi } from '@api';
+import { createAppAsyncThunk } from '../store';
 
-export const getFeeds = createAsyncThunk('feeds/get', async () => {
-  const data = await getFeedsApi();
-  const { orders, total, totalToday } = data;
-  return { orders, total, totalToday };
-});
+// export const getFeeds = createAsyncThunk('feeds/get', burgerApi.getFeedsApi);
+
+export const getFeeds = createAppAsyncThunk('feeds/get', async (_, thunkAPI) =>
+  thunkAPI.extra.burgerApi.getFeedsApi()
+);
