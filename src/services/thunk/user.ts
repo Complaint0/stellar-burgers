@@ -1,38 +1,44 @@
-import { burgerApi, TLoginData, TRegisterData } from '@api';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TLoginData, TRegisterData } from '@api';
 import { setCookie } from '../../utils/cookie';
+import { createAppAsyncThunk } from '../hooks/storeHooks';
 
-export const userRegister = createAsyncThunk(
+export const userRegister = createAppAsyncThunk(
   'user/register',
-  async (user: TRegisterData) => {
-    const data = await burgerApi.registerUserApi(user);
+  async (user: TRegisterData, thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.registerUserApi(user);
     localStorage.setItem('refreshToken', data.refreshToken);
     setCookie('accessToken', data.accessToken);
     return data.user;
   }
 );
 
-export const userLogin = createAsyncThunk(
+export const userLogin = createAppAsyncThunk(
   'user/login',
-  async (user: TLoginData) => {
-    const data = await burgerApi.loginUserApi(user);
+  async (user: TLoginData, thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.loginUserApi(user);
     localStorage.setItem('refreshToken', data.refreshToken);
     setCookie('accessToken', data.accessToken);
     return data.user;
   }
 );
 
-export const userLogout = createAsyncThunk('user/logout', burgerApi.logoutApi);
+export const userLogout = createAppAsyncThunk(
+  'user/logout',
+  async (_, thunkAPI) => thunkAPI.extra.burgerApi.logoutApi
+);
 
-export const userAutoLogin = createAsyncThunk('user/autoLogin', async () => {
-  const data = await burgerApi.getUserApi();
-  return data.user;
-});
+export const userAutoLogin = createAppAsyncThunk(
+  'user/autoLogin',
+  async (_, thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.getUserApi();
+    return data.user;
+  }
+);
 
-export const changeUserData = createAsyncThunk(
+export const changeUserData = createAppAsyncThunk(
   'user/changeUserData',
-  async (user: Partial<TRegisterData>) => {
-    const data = await burgerApi.updateUserApi(user);
+  async (user: Partial<TRegisterData>, thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.updateUserApi(user);
     return data.user;
   }
 );

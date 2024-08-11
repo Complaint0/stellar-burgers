@@ -6,11 +6,6 @@ import {
   UnknownAction
 } from '@reduxjs/toolkit';
 
-import {
-  TypedUseSelectorHook,
-  useDispatch as dispatchHook,
-  useSelector as selectorHook
-} from 'react-redux';
 import ingredients from './slices/ingredients';
 import burgerConstructor from './slices/burger';
 import userSlice from './slices/user';
@@ -42,15 +37,7 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
 export type TExtraArgument = typeof extraArgument;
-
-export const useDispatch: () => AppDispatch = () => dispatchHook();
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
-
-export const createAppAsyncThunk = createAsyncThunk.withTypes<{
-  state: RootState;
-  dispatch: AppDispatch;
-  extra: TExtraArgument;
-}>();
 
 export default store;

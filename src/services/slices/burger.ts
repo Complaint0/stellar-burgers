@@ -1,9 +1,4 @@
-import {
-  createSelector,
-  createSlice,
-  nanoid,
-  PayloadAction
-} from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { bun, burgerConstructorSliceName } from './constants';
 

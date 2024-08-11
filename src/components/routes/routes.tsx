@@ -20,85 +20,6 @@ import {
 import { IngredientDetails, Modal, OrderInfo } from '@components';
 import { ProtectedRoute } from './protectedRoute';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <ConstructorPage />
-  },
-  {
-    path: '/feed',
-    element: <Feed />
-  },
-  {
-    path: '/login',
-    element: (
-      <ProtectedRoute onlyUnAuth>
-        <Login />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/register',
-    element: (
-      <ProtectedRoute onlyUnAuth>
-        <Register />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/forgot-password',
-    element: (
-      <ProtectedRoute onlyUnAuth>
-        <ForgotPassword />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/reset-password',
-    element: (
-      <ProtectedRoute onlyUnAuth>
-        <ResetPassword />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/profile',
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '/profile/orders',
-    element: (
-      <ProtectedRoute>
-        <ProfileOrders />
-      </ProtectedRoute>
-    )
-  },
-  {
-    path: '*',
-    element: <NotFound404 />
-  },
-  {
-    path: '/feed/:number',
-    element: <OrderInfo />
-  },
-  {
-    path: '/ingredients/:id',
-    element: <IngredientDetails />
-  },
-  {
-    path: '/profile/orders/:number',
-    element: (
-      <ProtectedRoute>
-        <OrderInfo />
-      </ProtectedRoute>
-    )
-  }
-]);
-
 export const AppRoute = () => {
   const navigate = useNavigate();
   const handleClose = () => navigate(-1);
@@ -107,7 +28,7 @@ export const AppRoute = () => {
 
   return (
     <>
-      <Routes location={background}>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route

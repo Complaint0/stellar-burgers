@@ -1,7 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useDispatch, useSelector } from '../../services/store';
 import {
   clearIngredients,
   selectBurgerBun,
@@ -16,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { selectIsOrderDone } from '../../services/slices/order';
 import { getFeeds } from '../../services/thunk/feeds';
+import { useDispatch, useSelector } from '../../services/hooks/storeHooks';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
@@ -46,7 +46,6 @@ export const BurgerConstructor: FC = () => {
   };
 
   const closeOrderModal = () => {
-    navigate('/feed');
     dispatch(setIsOrderDone());
     dispatch(clearIngredients());
     dispatch(getFeeds());

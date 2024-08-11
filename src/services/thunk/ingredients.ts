@@ -1,6 +1,6 @@
-import { burgerApi } from '@api';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAppAsyncThunk } from '../hooks/storeHooks';
 
-export const getIngredients = createAsyncThunk('intgredients/get', async () =>
-  burgerApi.getIngredientsApi()
+export const getIngredients = createAppAsyncThunk(
+  'intgredients/get',
+  async (_, thunkAPI) => thunkAPI.extra.burgerApi.getIngredientsApi()
 );

@@ -13,11 +13,13 @@ type TUserSlice = {
   isAuth: boolean;
   isAuthChecked: boolean;
   user: TUser;
+  error: string;
 };
 
 const initialState: TUserSlice = {
   isAuth: false,
   isAuthChecked: true,
+  error: '',
   user: {
     email: '',
     name: ''
@@ -38,6 +40,7 @@ const userSlice = createSlice({
     builder.addCase(userRegister.pending, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = false;
+      state.error = '';
     });
     builder.addCase(
       userRegister.fulfilled,
@@ -45,16 +48,19 @@ const userSlice = createSlice({
         state.isAuth = true;
         state.isAuthChecked = true;
         state.user = payload;
+        state.error = '';
       }
     );
     builder.addCase(userRegister.rejected, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = true;
+      state.error = action.error.message || '';
     });
 
     builder.addCase(userLogin.pending, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = false;
+      state.error = '';
     });
     builder.addCase(
       userLogin.fulfilled,
@@ -62,30 +68,36 @@ const userSlice = createSlice({
         state.isAuth = true;
         state.isAuthChecked = true;
         state.user = payload;
+        state.error = '';
       }
     );
     builder.addCase(userLogin.rejected, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = true;
+      state.error = action.error.message || '';
     });
 
     builder.addCase(userLogout.pending, (state, action) => {
       state.isAuthChecked = false;
+      state.error = '';
     });
     builder.addCase(userLogout.fulfilled, (state) => {
       state.isAuth = false;
       state.isAuthChecked = true;
       state.user.email = '';
       state.user.name = '';
+      state.error = '';
     });
     builder.addCase(userLogout.rejected, (state, action) => {
       state.isAuth = true;
       state.isAuthChecked = true;
+      state.error = action.error.message || '';
     });
 
     builder.addCase(userAutoLogin.pending, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = false;
+      state.error = '';
     });
     builder.addCase(
       userAutoLogin.fulfilled,
@@ -93,11 +105,13 @@ const userSlice = createSlice({
         state.isAuth = true;
         state.isAuthChecked = true;
         state.user = payload;
+        state.error = '';
       }
     );
     builder.addCase(userAutoLogin.rejected, (state, action) => {
       state.isAuth = false;
       state.isAuthChecked = true;
+      state.error = action.error.message || '';
     });
 
     builder.addCase(changeUserData.pending, (state, action) => {

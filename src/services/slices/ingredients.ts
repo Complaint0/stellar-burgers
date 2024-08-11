@@ -1,18 +1,17 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { TIngredient, TTabMode } from '@utils-types';
+import { TError, TIngredient, TTabMode } from '@utils-types';
 import { ingredientSliceName } from './constants';
 import { getIngredients } from '../thunk/ingredients';
 
-interface ingredientsSliceType {
+type ingredientsSliceType = {
   isLoading: boolean;
   data: TIngredient[];
-  error: string | null;
-}
+} & TError;
 
 const initialState: ingredientsSliceType = {
   isLoading: true,
   data: [],
-  error: null
+  error: ''
 };
 
 const ingredients = createSlice({
@@ -35,15 +34,16 @@ const ingredients = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getIngredients.pending, (state, action) => {
       state.isLoading = true;
-      state.error = null;
+      state.error = '';
     });
     builder.addCase(getIngredients.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message || null;
+      state.error = action.error.message || '';
     });
     builder.addCase(getIngredients.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      state.error = '';
     });
   }
 });

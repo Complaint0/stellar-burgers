@@ -3,7 +3,7 @@ import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { selectInitIngredientById } from '../../services/slices/ingredients';
 import { useParams } from 'react-router-dom';
-import { useSelector } from '../../services/store';
+import { useSelector } from '../../services/hooks/storeHooks';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */

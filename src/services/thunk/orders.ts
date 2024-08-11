@@ -1,22 +1,22 @@
-import { burgerApi } from '@api';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAppAsyncThunk } from '../hooks/storeHooks';
 
-export const getOrders = createAsyncThunk('orders/get', async () =>
-  burgerApi.getOrdersApi()
+export const getOrders = createAppAsyncThunk(
+  'orders/get',
+  async (_, thunkAPI) => thunkAPI.extra.burgerApi.getOrdersApi()
 );
 
-export const postOrder = createAsyncThunk(
+export const postOrder = createAppAsyncThunk(
   'order/post',
-  async (ids: string[]) => {
-    const data = await burgerApi.orderBurgerApi(ids);
+  async (ids: string[], thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.orderBurgerApi(ids);
     return data.order;
   }
 );
 
-export const getOrderByNumber = createAsyncThunk(
+export const getOrderByNumber = createAppAsyncThunk(
   'order/get',
-  async (number: number) => {
-    const data = await burgerApi.getOrderByNumberApi(number);
+  async (number: number, thunkAPI) => {
+    const data = await thunkAPI.extra.burgerApi.getOrderByNumberApi(number);
     return data.orders;
   }
 );

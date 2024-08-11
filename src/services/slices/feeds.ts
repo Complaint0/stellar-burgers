@@ -1,12 +1,15 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TOrdersData } from '@utils-types';
+import { TError, TOrdersData } from '@utils-types';
 import { feedsSliceName } from './constants';
 import { getFeeds } from '../thunk/feeds';
 
-const initialState: TOrdersData = {
+type TFeedSlice = TOrdersData & TError;
+
+const initialState: TFeedSlice = {
   orders: [],
   total: 0,
-  totalToday: 0
+  totalToday: 0,
+  error: ''
 };
 
 const feeds = createSlice({
@@ -27,6 +30,7 @@ const feeds = createSlice({
       state.orders = [];
       state.total = 0;
       state.totalToday = 0;
+      state.error = '';
     });
     builder.addCase(
       getFeeds.fulfilled,
@@ -34,12 +38,14 @@ const feeds = createSlice({
         state.orders = payload.orders;
         state.total = payload.total;
         state.totalToday = payload.totalToday;
+        state.error = '';
       }
     );
-    builder.addCase(getFeeds.rejected, (state) => {
+    builder.addCase(getFeeds.rejected, (state, action) => {
       state.orders = [];
       state.total = 0;
       state.totalToday = 0;
+      state.error = action.error.message || '';
     });
   }
 });
