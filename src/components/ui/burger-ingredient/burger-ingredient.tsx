@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './burger-ingredient.module.css';
 
 import {
@@ -13,6 +13,7 @@ import { TBurgerIngredientUIProps } from './type';
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
     const { image, price, name, _id } = ingredient;
+    const location = useLocation();
 
     return (
       <li className={styles.container}>
