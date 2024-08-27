@@ -6,13 +6,13 @@ import {
   UnknownAction
 } from '@reduxjs/toolkit';
 
-import ingredients from './slices/ingredients';
-import burgerConstructor from './slices/burger';
-import userSlice from './slices/user';
-import feeds from './slices/feeds';
-import orders from './slices/orders';
-import orderSlice from './slices/order';
+import ingredients from './slices/ingredients/ingredients';
+import user from './slices/user/user';
+import feeds from './slices/feeds/feeds';
+import orders from './slices/orders/orders';
+import order from './slices/order/order';
 import { burgerApi } from '@api';
+import burgerConstructor from './slices/burger/burger';
 
 const extraArgument = {
   burgerApi
@@ -21,10 +21,10 @@ const extraArgument = {
 const rootReducer = combineReducers({
   [ingredients.name]: ingredients.reducer,
   [burgerConstructor.name]: burgerConstructor.reducer,
-  [userSlice.name]: userSlice.reducer,
+  [user.name]: user.reducer,
   [feeds.name]: feeds.reducer,
   [orders.name]: orders.reducer,
-  [orderSlice.name]: orderSlice.reducer
+  [order.name]: order.reducer
 });
 
 const store = configureStore({
