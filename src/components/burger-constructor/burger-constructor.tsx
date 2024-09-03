@@ -5,15 +5,15 @@ import {
   clearIngredients,
   selectBurgerBun,
   selectBurgerIngredients
-} from '../../services/slices/burger';
+} from '../../services/slices/burger/burger';
 import { postOrder } from '../../services/thunk/orders';
-import { selectIsAuth } from '../../services/slices/user';
+import { selectIsAuth } from '../../services/slices/user/user';
 import {
   selectOrderIsLoading,
   setIsOrderDone
-} from '../../services/slices/order';
+} from '../../services/slices/order/order';
 import { useNavigate } from 'react-router-dom';
-import { selectIsOrderDone } from '../../services/slices/order';
+import { selectIsOrderDone } from '../../services/slices/order/order';
 import { getFeeds } from '../../services/thunk/feeds';
 import { useDispatch, useSelector } from '../../services/hooks/storeHooks';
 

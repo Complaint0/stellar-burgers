@@ -1,5 +1,3 @@
-import exp from 'constants';
-
 export type TIngredient = {
   _id: string;
   name: string;

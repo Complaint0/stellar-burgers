@@ -1,6 +1,9 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { selectUserEmail, selectUserName } from '../../services/slices/user';
+import {
+  selectUserEmail,
+  selectUserName
+} from '../../services/slices/user/user';
 import { useDispatch, useSelector } from '../../services/hooks/storeHooks';
 import { changeUserData } from '../../services/thunk/user';
 
@@ -18,14 +21,6 @@ export const Profile: FC = () => {
     email: user.email,
     password: ''
   });
-
-  // useEffect(() => {
-  //   setFormValue((prevState) => ({
-  //     ...prevState,
-  //     name: user?.name || '',
-  //     email: user?.email || ''
-  //   }));
-  // }, [user]);
 
   const isFormChanged =
     formValue.name !== user?.name ||

@@ -6,7 +6,7 @@ import { useSelector } from '../../services/hooks/storeHooks';
 import {
   selectBurgerBun,
   selectBurgerIngredients
-} from '../../services/slices/burger';
+} from '../../services/slices/burger/burger';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
